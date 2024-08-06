@@ -22,6 +22,7 @@ pipeline {
                 sh 'ls -la'
             }
         }
+        
         stage('Test'){
           // Define the agent specific to this stage using Docker
             agent {
@@ -37,6 +38,13 @@ pipeline {
               // Check build folder for index.html
               sh 'test -f build/index.html'
             }
+        }
+
+        stage("Deploy"){
+         sh '''
+            npm install netlify-ci
+            node_modules/.bin/netlify --version
+         ''' 
         }
     }
 }
