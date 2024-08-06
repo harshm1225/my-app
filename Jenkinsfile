@@ -9,7 +9,7 @@ pipeline {
             agent {
                 docker {
                     // Use the 'node:20.16.0-slim' Docker image for this stage
-                    image 'node:20.16.0-slim'
+                    image 'node:20.16.0-bookworm-slim'
                     // Reuse the same Docker container for subsequent steps within this stage
                     reuseNode true
                 }
@@ -29,8 +29,8 @@ pipeline {
           // Define the agent specific to this stage using Docker
             agent {
                 docker {
-                    // Use the 'node:20.16.0-slim' Docker image for this stage
-                    image 'node:20.16.0-slim'
+                    // Use the '20.16.0-bookworm-slim' Docker image for this stage
+                    image 'node:20.16.0-bookworm-slim'
                     // Reuse the same Docker container for subsequent steps within this stage
                     reuseNode true
                 }
@@ -46,7 +46,7 @@ pipeline {
           agent {
                 docker {
                     // Use the 'node:20.16.0-slim' Docker image for this stage
-                    image 'node:20.16.0-slim'
+                    image 'node:20.16.0-bookworm-slim'
                     // Reuse the same Docker container for subsequent steps within this stage
                     reuseNode true
                 }
