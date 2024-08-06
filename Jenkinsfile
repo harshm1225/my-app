@@ -43,6 +43,14 @@ pipeline {
         }
 
         stage("Deploy"){
+          agent {
+                docker {
+                    // Use the 'node:20.16.0-slim' Docker image for this stage
+                    image 'node:20.16.0-slim'
+                    // Reuse the same Docker container for subsequent steps within this stage
+                    reuseNode true
+                }
+            }
          steps {
 
          sh '''
