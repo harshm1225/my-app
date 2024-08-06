@@ -1,6 +1,8 @@
 pipeline {
     agent none  // Specify that the pipeline does not use a global agent
-
+    environment {
+        NETLIFY_SITE_ID = '111a1412-1e93-47bb-9a18-e1ff0a216af0'
+    }
     stages {
         stage('Build') {
             // Define the agent specific to this stage using Docker
