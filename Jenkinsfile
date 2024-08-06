@@ -14,10 +14,12 @@ pipeline {
             }
             steps {
                 // Install Node.js dependencies
-                sh 'npm install'
+                sh 'npm ci'
                 
                 // Build the project using the installed dependencies
                 sh 'npm run build'
+
+                sh 'ls -la'
             }
         }
         stage('Test'){
@@ -31,6 +33,7 @@ pipeline {
                 }
             }
             steps {
+              sh 'npm run test'
               // Check build folder for index.html
               sh 'test -f build/index.html'
             }
