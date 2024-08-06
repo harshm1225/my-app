@@ -41,10 +41,13 @@ pipeline {
         }
 
         stage("Deploy"){
+         steps {
+
          sh '''
             npm install netlify-ci
             node_modules/.bin/netlify --version
          ''' 
+         }
         }
     }
 }
