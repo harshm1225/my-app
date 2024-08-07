@@ -43,7 +43,7 @@ pipeline {
             }
         }
 
-        stage("Deploy"){
+        stage("Deploy staging"){
           agent {
                 docker {
                     // Use the 'node:20.16.0-slim' Docker image for this stage
@@ -57,6 +57,28 @@ pipeline {
          sh '''
             npm install netlify-cli
             node_modules/.bin/netlify --version
+            echo "Deploying to staging. Site ID: $NETLIFY_SITE_ID"
+            node_modules/.bin/netlify status
+            node_modules/.bin/netlify deploy --dir=build 
+         ''' 
+         }
+        }
+        
+        stage("Deploy prod"){
+          agent {
+                docker {
+                    // Use the 'node:20.16.0-slim' Docker image for this stage
+                    image 'node:20.16.0-bookworm-slim'
+                    // Reuse the same Docker container for subsequent steps within this stage
+                    reuseNode true
+                }
+            }
+         steps {
+
+         sh '''
+            npm install netlify-cli
+            node_modules/.bin/netlify --version
+            echo "Deploying to prod. Site ID: $NETLIFY_SITE_ID"
             node_modules/.bin/netlify status
             node_modules/.bin/netlify deploy --dir=build --prod
          ''' 
